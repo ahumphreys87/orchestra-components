@@ -1,0 +1,13 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "browsers": ["> 10%"]
+        },
+        "modules": false
+      }
+    ]
+  ]
+}
