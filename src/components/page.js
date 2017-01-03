@@ -1,7 +1,7 @@
 import { patch } from 'incremental-dom';
 import { bindActionCreators } from 'redux';
-import { observeStore } from './redux/helpers';
-import { provider } from './redux';
+import { observeStore } from '../redux/helpers';
+import { provider } from '../redux';
 
 const defaultMapState = () => ({});
 const defaultMapDispatch = dispatch => ({ dispatch });
