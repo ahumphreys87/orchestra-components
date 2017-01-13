@@ -4,7 +4,6 @@ const delegateEventSplitter = /^(\S+)\s*(.*)$/;
 export class Component extends HTMLElement {
   constructor() {
     super();
-    this.createShadowRoot();
   }
 
   connectedCallback() {
@@ -65,14 +64,14 @@ export class Component extends HTMLElement {
       const eventName = match[1];
       const selector = match[2];
       const method = this[this.events[event]];
-      const els = [...this.shadowRoot.querySelectorAll(selector)];
+      const els = [...this.querySelectorAll(selector)];
       this.bindEvents(els, eventName, method);
     }
   }
 
   undelegateEvents() {
     for (const domEvent of this._domEvents) {
-      const els = [...this.shadowRoot.querySelectorAll(domEvent.selector)];
+      const els = [...this.querySelectorAll(domEvent.selector)];
       this.unbindEvents(els, domEvent.eventName, this);
     }
 
@@ -80,7 +79,7 @@ export class Component extends HTMLElement {
   }
 
   render() {
-    patch(this.shadowRoot, this.template, this.data);
+    patch(this, this.template, this.data);
     this.delegateEvents();
   }
 }

@@ -10,7 +10,6 @@ export class Page extends HTMLElement {
   constructor() {
     super();
     this.connectToStore();
-    this.createShadowRoot();
   }
 
   connectedCallback() {
@@ -45,6 +44,6 @@ export class Page extends HTMLElement {
   }
 
   render() {
-    patch(this.shadowRoot, this.template, this.data);
+    patch(this, this.template, this.data);
   }
 }
