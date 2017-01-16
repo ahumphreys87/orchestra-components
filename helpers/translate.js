@@ -1,31 +1,23 @@
-import i18next from 'i18next';
+import Polyglot from 'node-polyglot';
 
-const resources = {};
+const polyglot = new Polyglot();
 
 class TranslateHelpers {
-  addLocale(key, resStore) {
-    resources[key] = resStore;
+  setTranslations(locale, translations) {
+    polyglot.locale(locale);
+    polyglot.replace(translations);
   }
 
-  translate(i18nKey, locale, params) {
-    let result = null;
+  translate(i18nKey, params) {
+    if (!i18nKey) {
+      return;
+    }
 
     if (typeof params === 'string') {
-      console.log(params);
       params = JSON.parse(params);
     }
 
-    i18next
-      .init({
-        nsSeparator: false,
-        keySeparator: false,
-        lng: locale,
-        resources: resources[locale]
-      }, (err, translate) => {
-        result = translate(i18nKey, params);
-      });
-
-    return result;
+    return polyglot.t(i18nKey, params);
   }
 }
 
