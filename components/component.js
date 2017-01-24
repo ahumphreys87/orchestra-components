@@ -28,7 +28,7 @@ export class Component extends HTMLElement {
 
   handleEvent(event) {
     const validEvents = this._domEvents.filter(domEvent => {
-      if (domEvent.eventName === event.type && event.path.includes(domEvent.element)) {
+      if (domEvent.eventName === event.type && event.target === domEvent.element) {
         return true;
       }
 
