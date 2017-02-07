@@ -36,7 +36,7 @@ export class Component extends HTMLElement {
     });
 
     for (const domEvent of validEvents) {
-      domEvent.method.call(this);
+      domEvent.method.call(this, event);
     }
   }
 
