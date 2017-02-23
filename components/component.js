@@ -1,4 +1,4 @@
-import { patch } from 'incremental-dom';
+// import { patch } from 'incremental-dom';
 const delegateEventSplitter = /^(\S+)\s*(.*)$/;
 
 export class Component extends HTMLElement {
@@ -79,7 +79,8 @@ export class Component extends HTMLElement {
   }
 
   render() {
-    patch(this, this.template, this.data);
+    this.innerHTML = this.template;
+    // patch(this, this.template, this.data);
     this.delegateEvents();
   }
 }
