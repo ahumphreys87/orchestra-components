@@ -1,9 +1,16 @@
 // import { patch } from 'incremental-dom';
+import { bindActionCreators } from 'redux';
+import { observeStore } from '../redux/helpers';
+import { provider } from '../redux';
+
 const delegateEventSplitter = /^(\S+)\s*(.*)$/;
+const defaultMapState = () => ({});
+const defaultMapDispatch = dispatch => ({ dispatch });
 
 export class Component extends HTMLElement {
   constructor() {
     super();
+    this.connectToStore();
   }
 
   connectedCallback() {
@@ -53,6 +60,25 @@ export class Component extends HTMLElement {
     for (const element of elements) {
       element.removeEventListener(eventName, this);
     }
+  }
+
+  connectToStore() {
+    if (!provider.store) {
+      return;
+    }
+
+    const mapState = this.mapState || defaultMapState;
+    const mapDispatch = this.mapDispatch || defaultMapDispatch;
+    const actions = bindActionCreators(mapDispatch(), provider.store.dispatch);
+    const currentState = mapState(provider.store.getState());
+
+    this.state = currentState;
+    this.actions = actions;
+
+    observeStore(provider.store, currentState, mapState, (newState, oldState) => {
+      this.state = newState;
+      if (typeof this.storeUpdated === 'function') this.storeUpdated(oldState);
+    });
   }
 
   delegateEvents() {
