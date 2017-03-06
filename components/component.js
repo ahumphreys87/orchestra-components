@@ -18,7 +18,9 @@ export class Component extends HTMLElement {
   }
 
   disconnectedCallback() {
-    this.undelegateEvents();
+    if (typeof this.undelegateEvents === 'function') {
+      this.undelegateEvents();
+    }
   }
 
   get data() {
