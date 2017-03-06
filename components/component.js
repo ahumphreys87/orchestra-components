@@ -96,9 +96,11 @@ export class Component extends HTMLElement {
   }
 
   undelegateEvents() {
-    for (const domEvent of this._domEvents) {
-      const els = [...this.querySelectorAll(domEvent.selector)];
-      this.unbindEvents(els, domEvent.eventName, this);
+    if (this._domEvents) {
+      for (const domEvent of this._domEvents) {
+        const els = [...this.querySelectorAll(domEvent.selector)];
+        this.unbindEvents(els, domEvent.eventName, this);
+      }
     }
 
     this._domEvents = [];

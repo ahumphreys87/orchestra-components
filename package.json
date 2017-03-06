@@ -1,9 +1,10 @@
 {
   "name": "orchestra-components",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "",
   "main": "index.js",
   "author": "Andrew Humphreys <ahumphreys87@googlemail.com>",
+  "contributors": "Liam Swinney <me@liamswinney.co.uk>",
   "license": "ISC",
   "dependencies": {
     "cherrytree": "^2.3.2",
