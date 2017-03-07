@@ -113,4 +113,32 @@ export class Component extends HTMLElement {
     // patch(this, this.template, this.data);
     this.delegateEvents();
   }
+
+  shouldComponentUpdate() {
+    let isDirty = false;
+
+    if (this.currentData) {
+      for (const prop in this.data) {
+        if (Array.isArray(this.data[prop])) {
+          const isEqual = this.data[prop].every((element, index) => element === this.currentData[prop][index]);
+
+          if (!isEqual) {
+            isDirty = true;
+            break;
+          }
+        } else {
+          if (this.data[prop] !== this.currentData[prop]) {
+            isDirty = true;
+            break;
+          }
+        }
+      }
+    } else {
+      isDirty = true;
+    }
+
+    this.currentData = this.data;
+
+    return isDirty;
+  }
 }
