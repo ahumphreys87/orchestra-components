@@ -1,6 +1,6 @@
 class CurrencyHelper {
   format(amount, decimals, locale, currency) {
-    if (!amount) {
+    if (amount === undefined) {
       return;
     }
 
