@@ -1,4 +1,4 @@
-// import { patch } from 'incremental-dom';
+import { patch } from 'incremental-dom';
 import { bindActionCreators } from 'redux';
 import { observeStore } from '../redux/helpers';
 import { provider } from '../redux';
@@ -109,8 +109,7 @@ export class Component extends HTMLElement {
   }
 
   render() {
-    this.innerHTML = this.template;
-    // patch(this, this.template, this.data);
+    patch(this, this.template, this.data);
     this.delegateEvents();
   }
 
