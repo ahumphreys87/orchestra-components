@@ -110,8 +110,12 @@ export class Component extends HTMLElement {
 
   render() {
     patch(this, this.template, this.data);
+
     this.delegateEvents();
+    this.onRender();
   }
+
+  onRender() {}
 
   shouldComponentUpdate() {
     let isDirty = false;
