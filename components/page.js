@@ -45,5 +45,9 @@ export class Page extends HTMLElement {
 
   render() {
     patch(this, this.template, this.data);
+
+    this.onRender();
   }
+
+  onRender() {}
 }
