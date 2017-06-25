@@ -119,18 +119,19 @@ export class Component extends HTMLElement {
 
   shouldComponentUpdate() {
     let isDirty = false;
+    const dataset = JSON.parse(JSON.stringify(this.dataset));
 
     if (this.currentData) {
-      for (const prop in this.data) {
-        if (Array.isArray(this.data[prop])) {
-          const isEqual = this.data[prop].every((element, index) => element === this.currentData[prop][index]);
+      for (const prop in dataset) {
+        if (Array.isArray(dataset[prop])) {
+          const isEqual = dataset[prop].every((element, index) => element === this.currentData[prop][index]);
 
           if (!isEqual) {
             isDirty = true;
             break;
           }
         } else {
-          if (this.data[prop] !== this.currentData[prop]) {
+          if (dataset[prop] !== this.currentData[prop]) {
             isDirty = true;
             break;
           }
@@ -140,7 +141,7 @@ export class Component extends HTMLElement {
       isDirty = true;
     }
 
-    this.currentData = this.data;
+    this.currentData = dataset;
 
     return isDirty;
   }
