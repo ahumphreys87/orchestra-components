@@ -10,6 +10,13 @@ const defaultMapDispatch = dispatch => ({ dispatch });
 export class Component extends HTMLElement {
   constructor() {
     super();
+
+    if (document.head.createShadowRoot || document.head.attachShadow) {
+        this.attachShadow({mode: 'open'});
+    } else {
+        this.shadowRoot = this;
+    }
+
     this.connectToStore();
   }
 
@@ -92,7 +99,7 @@ export class Component extends HTMLElement {
       const eventName = match[1];
       const selector = match[2];
       const method = this[this.events[event]];
-      const els = [...this.querySelectorAll(selector)];
+      const els = [...this.shadowRoot.querySelectorAll(selector)];
       this.bindEvents(els, eventName, method);
     }
   }
@@ -100,7 +107,7 @@ export class Component extends HTMLElement {
   undelegateEvents() {
     if (this._domEvents) {
       for (const domEvent of this._domEvents) {
-        const els = [...this.querySelectorAll(domEvent.selector)];
+        const els = [...this.shadowRoot.querySelectorAll(domEvent.selector)];
         this.unbindEvents(els, domEvent.eventName, this);
       }
     }
@@ -109,7 +116,7 @@ export class Component extends HTMLElement {
   }
 
   render() {
-    patch(this, this.template, this.data);
+    patch(this.shadowRoot, this.template, this.data);
 
     this.delegateEvents();
     this.onRender();
