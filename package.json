@@ -1,8 +1,9 @@
 {
   "name": "orchestra-components",
-  "version": "0.8.1",
+  "version": "0.9.0",
   "description": "",
   "main": "index.js",
+  "repository": "https://github.com/ahumphreys87/orchestra-components",
   "author": "Andrew Humphreys <ahumphreys87@googlemail.com>",
   "contributors": "Liam Swinney <me@liamswinney.co.uk>",
   "license": "ISC",
@@ -10,8 +11,6 @@
     "cherrytree": "^2.3.2",
     "incremental-dom": "0.5.1",
     "node-polyglot": "^2.2.2",
-    "redux": "^3.6.0",
-    "redux-logger": "^2.7.4",
-    "redux-thunk": "^2.1.0"
+    "redux": "^3.6.0"
   }
 }
