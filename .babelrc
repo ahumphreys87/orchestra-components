@@ -1,4 +1,9 @@
 {
+  "env": {
+    "test": {
+      "presets": ["node6"],
+    }
+  },
   "presets": [
     [
       "env",
